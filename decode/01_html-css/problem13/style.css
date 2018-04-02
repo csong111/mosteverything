@@ -1,0 +1,21 @@
+.container {
+    display: flex;
+    margin: 5px;
+    margin-bottom: 78px;
+}
+
+.all {
+    display: flex;
+}
+
+.smol {
+    height: 90px;
+}
+
+.col {
+    text-align: center;
+    border-style: dashed;
+    border-width: thick;
+    margin: 15px;
+    padding: 8px;
+}
