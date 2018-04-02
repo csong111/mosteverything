@@ -1,8 +1,14 @@
 .container {
+   display: flex;
 }
 
 .smol {
+    height: 120px;
 }
 
 .col {
+    border-style: dashed;
+    text-align: center;
+    padding: 8px;
+    margin: 20px;
 }
