@@ -13,7 +13,7 @@ let outputs = [
   "easy",
   "really",
   "meow",
-  undefined,
+  "",
   "please"
 ]
 
@@ -22,9 +22,6 @@ Make this function return the longest word in the input string. If the input str
 If multiple words have the same length, return the last one that matches.
 */
 function f(str) {
-    if (str === "") {
-        return undefined;
-    }
     // str = "this is not easy",
     var arr = str.split(" ");
     // arr = ["this","is","not","easy"]
