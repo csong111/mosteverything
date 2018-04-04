@@ -2,11 +2,19 @@ var assert = require('assert');
 
 // we need 5 test cases. 
 let inputs = [
-  
+"I have been here for twelve hours and I am hungry",
+"Lorem ipsumos dolor sit amet consectetur adipisicing elit. Magni quisquam",
+"I wish I could grasp concepts instantly but it is not possible",
+"I would like to eat a big meal and go to sleep",
+"This is a challenging question and every step hurts"
 ]
 
 let outputs = [
-  
+"I have been here for twelve hours and I \nam hungry",
+"Lorem ipsumos dolor sit amet consectetur adipisicing elit. Magni quisquam",
+"I wish I could grasp concepts instantly \nbut it is not possible",
+"I would like to eat a big meal and go to sleep",
+"This is a challenging question and every step hurts"
 ]
 
 /*
