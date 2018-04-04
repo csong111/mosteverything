@@ -2,16 +2,24 @@ var assert = require('assert');
 
 // we need 5 test cases.
 let inputs = [
-
+"",
+"abc",
+"bcd",
+"def",
+"xyz"
 ]
 
 let outputs = [
-  
+  undefined,
+  "c",
+  "d",
+  "f",
+  "z"
 ]
 
 // Make this function return the last letter of the string that is passed to it. If the string does not have a last letter, return undefined
 function f(str) {
-    
+    return str[str.length - 1];
 }
 
 function runTest(i) {

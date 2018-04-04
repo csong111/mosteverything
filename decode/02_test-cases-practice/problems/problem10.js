@@ -2,11 +2,19 @@ var assert = require('assert');
 
 // we need 5 test cases. 
 let inputs = [
-  
+  "hey there",
+  "how are you",
+  "why do you ask",
+  "JUST WONDERING",
+  "have a good day"
 ]
 
 let outputs = [
-  
+ "Hey There",
+ "How Are You",
+ "Why Do You Ask",
+ "Just Wondering",
+ "Have A Good Day"
 ]
 
 /*
@@ -17,7 +25,13 @@ f("ALL YOUR BASE ARE BELONG"); // All Your Base Are Belong
 
 */
 function f(str) {
-    
+    var arr = str.split(" ");
+    var newArr = [];
+    for (i = 0; i < arr.length; i++){
+        var word = arr[i];
+        newArr.push(word[0].toUpperCase() + word.substring(1).toLowerCase());
+    }
+    return newArr.join(" ");
 }
 
 function runTest(i) {
