@@ -11,10 +11,10 @@ let inputs = [
 
 let outputs = [
 "I have been here for twelve hours and I \nam hungry",
-"Lorem ipsumos dolor sit amet consectetur adipisicing elit. Magni quisquam",
+"Lorem ipsumos dolor sit amet consectetur\nadipisicing elit. Magni quisquam",
 "I wish I could grasp concepts instantly \nbut it is not possible",
-"I would like to eat a big meal and go to sleep",
-"This is a challenging question and every step hurts"
+"I would like to eat a big meal and go to\nsleep",
+"This is a challenging question and every\nstep hurts"
 ]
 
 /*
@@ -39,7 +39,11 @@ Lorem ipsumos dolor sit amet consectetur
  even though there is a space before the a in adipisicing
 */
 function f(str) {
-    
+    if (str[40] === " ") {
+        return str.slice(0, 40) + "\n" + str.slice(41, str.length);
+    }
+    return str.slice(0, 40) + "\n" + str.slice(40, str.length);
+   
 }
 
 function runTest(i) {
