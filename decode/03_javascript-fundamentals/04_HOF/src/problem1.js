@@ -77,11 +77,9 @@ function nullify(f) {
     
 
 function map(lst, f) {
-    function f(lst) {
-        for (i=0; i<lst.length; i++) {
+    for (i=0; i<lst.length; i++) {
             return lst.f();
         }
-    }
     }
     // lst is an array and f is a function
     // map returns an array with the same number of elements as lst
