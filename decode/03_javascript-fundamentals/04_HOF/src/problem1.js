@@ -53,16 +53,15 @@ function exceptionalize(f) {
     // g(12) returns 12
 
 function nullify(f) {
-    return function p(arg) {
-        if (arg === 0) throw new Error("shit");
-        try {
-            f(arg);
-        } catch(err){
-            return null;
+    return function p(arg) {}
+    try {
+        f(arg);
+    } catch(err){
+        return null;
         }
-        return f(arg);
+    return f(arg);
     }
-}
+
     // returns a new function
     // this function takes 1 input, called arg
     // if f(arg) throws an exception, this new function returns null
