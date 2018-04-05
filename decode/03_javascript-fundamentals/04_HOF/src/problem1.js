@@ -118,14 +118,13 @@ function filter(lst, f) {
 
 function every(lst, f) {
 for (i=0; i<lst.length; i++) {
-if (f(lst[i]) === true) {
+if (f(lst) === true) {
         return true;
 } 
 }
-if (f(lst) === false) {
-    return false;
+return false
 }
-}
+
 
     // lst is an array and f is a function
     // f takes 1 arguments and returns a boolean
