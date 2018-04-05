@@ -121,8 +121,8 @@ function every(lst, f) {
 for (i=0; i<lst.length; i++) {
 if (f(lst[i]) === true) {
         return true;
-} else if (f(lst[i]) === false) {
-    return false;
+} else {
+return false;
 } 
 }
 }
