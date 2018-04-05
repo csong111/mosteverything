@@ -95,9 +95,10 @@ function map(lst, f) {
     // map(["bob", "susie"], toUpperCase) returns ["BOB", "SUSIE"]
 
 function filter(lst, f) {
+    var newLst = []
     for (i=0; i<lst.length; i++) {
         if (f(lst[i]) === false) {
-           lst.splice(i);
+          newLst = newLst + lst.splice(i);
         }
     }
     return lst;
