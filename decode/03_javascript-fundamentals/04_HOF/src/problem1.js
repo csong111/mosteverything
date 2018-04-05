@@ -56,7 +56,7 @@ function nullify(f) {
     return function p(arg) {
         if (arg === 0) throw new Error("shit");
         try {
-            p(arg);
+            f(arg);
         } catch(err){
             return null;
         }
