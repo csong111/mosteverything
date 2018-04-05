@@ -77,8 +77,8 @@ function nullify(f) {
     
 
 function map(lst, f) {
-    function f() {
-        for (i=0; i<array.length; i++) {
+    function f(lst) {
+        for (i=0; i<lst.length; i++) {
             return lst.f();
         }
     }
