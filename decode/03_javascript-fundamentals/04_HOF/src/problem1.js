@@ -33,9 +33,9 @@ function callNoNull(f, arg) {
 
 
 function exceptionalize(f) {
-    return function f(arg){}
+    return function f(arg){};
         if (f(arg) === null) throw new Error("jk");
-        return arg;
+        return f(arg);
 }
     // returns a new function
     // this function takes 1 input, called arg
