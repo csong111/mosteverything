@@ -53,7 +53,8 @@ function exceptionalize(f) {
     // g(12) returns 12
 
 function nullify(f) {
-    return function p(arg) {}
+    return function p(arg) {};
+    
     try {
         f(arg);
     } catch(err){
