@@ -23,18 +23,17 @@ function callNoException(f, arg) {
 
 function callNoNull(f, arg) {
     function f(arg) {
-        if (f(arg) === null) throw new error("omfg");
-        if (arg === 0) throw new error("omg")
-        return arg;
-        try {
-            f(arg);
-        }
-        catch(err) {
-            return null;
-        }
-        return f(arg);
+    if (f(arg) === null) throw new error("omfg");
+    return arg;
     }
-
+    try {
+        f(arg);
+        }
+    catch(err) {
+        return null;
+        }
+    return f(arg);
+    }
     // if f(arg) returns null, throw an exception
     // otherwise return what f(arg) returned  
     // Example: 
@@ -44,9 +43,7 @@ function callNoNull(f, arg) {
     //  }
     // callNoNull(nullZero, 0) throws an exception
     // callNoNull(nullZero, 12) returns 12
-    
-    
-}
+
 
 function exceptionalize(f) {
     // returns a new function
