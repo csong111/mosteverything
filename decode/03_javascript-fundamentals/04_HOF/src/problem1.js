@@ -121,7 +121,9 @@ for (i=0; i<lst.length; i++) {
 if (f(lst[i]) === true) {
         return true;
 } 
-return false;
+}
+if (f(lst) === false) {
+    return false;
 }
 }
 
