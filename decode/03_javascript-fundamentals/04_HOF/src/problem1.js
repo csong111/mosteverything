@@ -97,7 +97,7 @@ function map(lst, f) {
 function filter(lst, f) {
     var newLst = [];
     for (i=0; i<lst.length; i++) {
-        if (f(lst[i]) === false) {
+        if (f(lst[i]) === true) {
             newLst = lst.splice(i);
         }
     }
