@@ -57,7 +57,7 @@ function nullify(f) {
         if (arg === 0) throw new Error("shit");
         try {
             p(arg);
-        } catch {
+        } catch(err){
             return null;
         }
         return f(arg);
