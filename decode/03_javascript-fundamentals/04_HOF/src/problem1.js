@@ -33,15 +33,11 @@ function callNoNull(f, arg) {
 
 
 function exceptionalize(f) {
-    function f(arg){
-    if (arg === 0) throw new Error("jk");
-    try {
-        f(arg);
-    } catch(err) {
-        return null;
-    }
+    return function f(arg){
+    if (f(arg) === null) throw new Error("jk");
     return arg;
     }
+}
     // returns a new function
     // this function takes 1 input, called arg
     // if f(arg) is null, this new function throws an exception
@@ -55,8 +51,6 @@ function exceptionalize(f) {
     // exceptionalize(nullZero) returns a function g such that
     // g(0) throws an exception
     // g(12) returns 12
-
-}
 
 function nullify(f) {
     // returns a new function
