@@ -53,6 +53,16 @@ function exceptionalize(f) {
     // g(12) returns 12
 
 function nullify(f) {
+    return function p(arg) {
+        if (arg === 0) throw new Error("shit");
+        try {
+            p(arg);
+        } catch {
+            return null;
+        }
+        return f(arg);
+    }
+}
     // returns a new function
     // this function takes 1 input, called arg
     // if f(arg) throws an exception, this new function returns null
@@ -66,7 +76,6 @@ function nullify(f) {
     //  g(0) returns null
     //  g(12) throws an exception
     
-}
 
 function map(lst, f) {
     // lst is an array and f is a function
