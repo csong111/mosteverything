@@ -122,7 +122,7 @@ if (f(lst[i]) === true) {
         return true;
 } 
 }
-if (f(lst[i]) === false) return false;
+return false;
 }
 
     // lst is an array and f is a function
