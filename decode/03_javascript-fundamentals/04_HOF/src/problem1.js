@@ -97,11 +97,12 @@ function map(lst, f) {
 function filter(lst, f) {
     var newLst = []
     for (i=0; i<lst.length; i++) {
-        if (f(lst[i]) === false) {
-          newLst = newLst + lst.splice(i);
+        if (f(lst[i]) === true) {
+          newLst.push(lst[i])
         }
     }
-    return lst;
+    return newLst;
+}
 
     // lst is an array and f is a function
     // f takes one argument and returns a boolean (true or false)
@@ -114,9 +115,15 @@ function filter(lst, f) {
     // Example:
     // function isEven(x) {return x % 2 == 0;}
     // filter([1, 2, 3, 4, 5], isEven) returns [2,4];   
-}
 
 function every(lst, f) {
+for (i=0; i<lst.length; i++) {
+if (f(lst[i]) === true) {
+    return true;
+}
+return false;
+}
+}
     // lst is an array and f is a function
     // f takes 1 arguments and returns a boolean
     // filter(lst, f) returns a true if f returns true for every element of lst
@@ -124,7 +131,6 @@ function every(lst, f) {
     // Example
     // every([2,4,12], x => x % 2 == 0) returns true
     // every([2,3,12], x => x % 2 == 0) returns false    
-}
 
 
 module.exports = {
