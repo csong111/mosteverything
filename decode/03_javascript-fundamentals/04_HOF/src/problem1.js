@@ -100,7 +100,9 @@ function filter(lst, f) {
     }
     var newLst = [];
     for (i=0; i<lst.length; i++) {
-        newLst = lst.push(f(lst[i]));
+        if (f(lst[i] === true)) {
+            newLst[i] = lst[i]
+        }
     }
     return newLst;
 
