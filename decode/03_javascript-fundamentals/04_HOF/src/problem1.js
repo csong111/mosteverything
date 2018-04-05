@@ -95,6 +95,15 @@ function map(lst, f) {
     // map(["bob", "susie"], toUpperCase) returns ["BOB", "SUSIE"]
 
 function filter(lst, f) {
+    function f(o) {
+        lst.includes(o);
+    }
+    var newLst = [];
+    for (i=0; i<lst.length; i++) {
+        newLst[i] = f(lst[i]);
+    }
+    return newLst;
+    
     // lst is an array and f is a function
     // f takes one argument and returns a boolean (true or false)
     // filter(lst, f) returns a list with all the elements of lst that does not satisfy f removed
