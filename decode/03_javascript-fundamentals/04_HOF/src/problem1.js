@@ -77,6 +77,12 @@ function nullify(f) {
     
 
 function map(lst, f) {
+    function f() {
+        for (i=0; i<array.length; i++) {
+            return lst.f();
+        }
+    }
+    }
     // lst is an array and f is a function
     // map returns an array with the same number of elements as lst
     // if lst = [a1, a2, a3, a4, a5] then map(lst, f) returns [f(a1), f(a2), f(a3), f(a4), f(a5)]
@@ -87,7 +93,6 @@ function map(lst, f) {
     //
     // function toUpperCase(str) { return str.toUpperCase(); }
     // map(["bob", "susie"], toUpperCase) returns ["BOB", "SUSIE"]
-}
 
 function filter(lst, f) {
     // lst is an array and f is a function
