@@ -117,13 +117,15 @@ function filter(lst, f) {
     // filter([1, 2, 3, 4, 5], isEven) returns [2,4];   
 
 function every(lst, f) {
+
 for (i=0; i<lst.length; i++) {
 if (f(lst[i]) === true) {
     return true;
+} if (f(lst[i]) === false) {
+    return false;
 }
-return false;
 }
-}
+
     // lst is an array and f is a function
     // f takes 1 arguments and returns a boolean
     // filter(lst, f) returns a true if f returns true for every element of lst
