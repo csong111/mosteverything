@@ -121,8 +121,8 @@ for (i=0; i<lst.length; i++) {
 if (f(lst[i]) === true) {
         return true;
 } 
-}
 return false;
+}
 }
 
     // lst is an array and f is a function
