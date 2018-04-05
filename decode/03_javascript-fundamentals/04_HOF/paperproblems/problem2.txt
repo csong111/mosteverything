@@ -3,8 +3,14 @@ You don't know what it does, but there are clues at the bottom of this file
 Use these clues to describe what map is.
 Specifically:
  - How many parameters does it have
+1
  - What are the types of the parameters
+array
  - What does it do?
+uses function double to double the elements of an array if its elements are Numbers
+uses function triple to triple the elements of an array if its elements are Numbers
+uses function to UpperCase to capitalize the elements of an array if its elements are strings
+uses function to LowerCase to put into small caps, the elements of an array if its elements are strings
 
 var someNumbers = [1, 2, 3, 4];
 var someStrings = ["bob", "ERIC"];

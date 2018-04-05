@@ -3,8 +3,11 @@ You don't know what it does, but there are clues at the bottom of this file
 Use these clues to describe what filter is.
 Specifically:
  - How many parameters does it have
+ 1
  - What are the types of the parameters
+ array
  - What does it do?
+ uses functions isEven & isOdd to see if the the elements of the array are even or odd, then prints out the ones that meet its own criteria of being even or odd
 
 
 

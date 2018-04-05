@@ -1,7 +1,18 @@
 
 function callNoException(f, arg) {
-    // if f(arg) throws an exception, return null
-    // otherwise return what f(arg) returned
+    function f(arg) {
+    if (arg === 0) throw new Error("wtf");
+    return arg;
+    }
+    try {
+        f(arg);
+    } catch(err) {
+        return null;
+    } 
+    return f(arg);
+}
+// if f(arg) throws an exception, return null
+// otherwise return what f(arg) returned  
     // Example:
     //  function throwsZero(x){
     //     if(x==0) throw new Error("woops");
@@ -9,9 +20,9 @@ function callNoException(f, arg) {
     //  }
     //  callNoException(throwsZero, 0) returns null
     //  callNoException(throwsZero, 12) returns 12
-}
 
 function callNoNull(f, arg) {
+
     // if f(arg) returns null, throw an exception
     // otherwise return what f(arg) returned  
     // Example: 
