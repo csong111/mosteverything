@@ -98,7 +98,7 @@ function filter(lst, f) {
     var newLst = [];
     for (i=0; i<lst.length; i++) {
         if (f(lst[i]) === false) {
-            newLst = lst.splice(lst[i]);
+            newLst = lst.splice(i);
         }
     }
     return newLst;
