@@ -125,6 +125,7 @@ if (f(lst[i]) === true) {
     return false;
 }
 }
+}
 
     // lst is an array and f is a function
     // f takes 1 arguments and returns a boolean
