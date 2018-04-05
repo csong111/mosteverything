@@ -40,7 +40,7 @@ function exceptionalize(f) {
     } catch(err) {
         return null;
     }
-    return f(arg);
+    return arg;
     }
     // returns a new function
     // this function takes 1 input, called arg
