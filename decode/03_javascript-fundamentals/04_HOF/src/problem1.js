@@ -79,7 +79,7 @@ function nullify(f) {
 function map(lst, f) {
     var newLst = [];
     for (i=0; i<lst.length; i++) {
-        newLst = newLst + f(lst[i]);
+        newLst[i] = f(lst[i]);
         }
     return newLst;
     }
