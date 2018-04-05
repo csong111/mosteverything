@@ -19,11 +19,6 @@ function callNoException(f, arg) {
 
 function callNoNull(f, arg) {
     if (f(arg) === null) throw new Error("omfg");    
-    try {
-        f(arg);
-    } catch(err) {
-        return null;
-    }
     return f(arg);
 }
     // if f(arg) returns null, throw an exception
