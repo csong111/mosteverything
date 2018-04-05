@@ -24,6 +24,7 @@ function callNoException(f, arg) {
 function callNoNull(f, arg) {
     function f(arg) {
         if (f(arg) === null) throw new error("omfg");
+        if (arg === 0) throw new error("omg")
         return arg;
         try {
             f(arg);
