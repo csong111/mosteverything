@@ -22,6 +22,17 @@ function callNoException(f, arg) {
     //  callNoException(throwsZero, 12) returns 12
 
 function callNoNull(f, arg) {
+    function f(arg) {
+        if (f(arg) === null) throw new error("omfg");
+        return arg;
+        try {
+            f(arg);
+        }
+        catch(err) {
+            return null;
+        }
+        return f(arg);
+    }
 
     // if f(arg) returns null, throw an exception
     // otherwise return what f(arg) returned  
