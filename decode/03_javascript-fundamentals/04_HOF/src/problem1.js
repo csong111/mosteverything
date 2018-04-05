@@ -95,13 +95,12 @@ function map(lst, f) {
     // map(["bob", "susie"], toUpperCase) returns ["BOB", "SUSIE"]
 
 function filter(lst, f) {
-    var newLst = [];
     for (i=0; i<lst.length; i++) {
         if (f(lst[i]) === true) {
-            newLst = lst.splice(i);
+           lst = lst.splice(i);
         }
     }
-    return newLst;
+    return lst;
 
     // lst is an array and f is a function
     // f takes one argument and returns a boolean (true or false)
