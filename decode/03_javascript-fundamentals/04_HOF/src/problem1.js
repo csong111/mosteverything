@@ -54,6 +54,7 @@ function exceptionalize(f) {
 
 function nullify(f) {
     return function p(arg) {}    
+    
     try {
         f(arg);
     } catch(err){
@@ -61,7 +62,6 @@ function nullify(f) {
         }
     return f(arg);
     }
-
     // returns a new function
     // this function takes 1 input, called arg
     // if f(arg) throws an exception, this new function returns null
