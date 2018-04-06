@@ -18,6 +18,7 @@ function detective(i) {
             return "something fishy";
         }
     }
+}
     // detective checks to see if the suspect throws an exception on input i.
     // Returns "everything ok" if the suspect doesn't. 
     // Returns "something fishy" if the suspect does.
