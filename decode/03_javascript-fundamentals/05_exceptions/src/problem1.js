@@ -1,4 +1,8 @@
 function first(arr) {
+    if (arr.length < 1) {
+        throw new Error("jesus");
+    } 
+    return arr[0];
     // Throw an exception if the array has no elements
     // Otherwise return the first element
 }
@@ -6,6 +10,13 @@ function first(arr) {
 function detective(i) {
     function suspect(i) {
         if(i * 7 % 3 == 0) throw new Error("Bad i!");
+        try {
+            suspect();
+        }
+        catch(err) {
+            return "something fishy";
+        }
+        return "everything ok";
     }
     // detective checks to see if the suspect throws an exception on input i.
     // Returns "everything ok" if the suspect doesn't. 
