@@ -9,16 +9,15 @@ function first(arr) {
 
 function detective(i) {
     function suspect(i) {
-        if(i * 7 % 3 == 0) throw new Error("Bad i!");
+        if(i * 7 % 3 == 0) throw new Error("Bad i!");}
         try {
             suspect(i);
+            return "everything ok";
         }
         catch(err) {
             return "something fishy";
         }
-        return "everything ok"
     }
-}
     // detective checks to see if the suspect throws an exception on input i.
     // Returns "everything ok" if the suspect doesn't. 
     // Returns "something fishy" if the suspect does.
