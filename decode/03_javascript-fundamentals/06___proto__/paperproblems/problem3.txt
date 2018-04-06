@@ -11,4 +11,6 @@ You get the following exception:
 
 
 a) Explain what this exception means.
+it means there is a loop of proto values looping back to each other
 b) Why does this exception exist? What's wrong with a cyclic __proto__ value?
+it's because b's proto value is not b; they should be the same.
