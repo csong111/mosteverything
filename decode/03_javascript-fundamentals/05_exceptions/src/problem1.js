@@ -24,7 +24,12 @@ function detective(i) {
 
 function assignFlight(name) {
     var flightNumber = ((name.length * 7) % 20) + "0";
-    var terrorSuspects = ["bob", "eric", "susie"];
+    var terrorSuspects = ["bob", "eric", "susie"]
+
+    for (i=0; i<terrorSuspects.length; i++) {
+        if (name === terrorSuspects[i]) throw new Error("fuck");
+    }
+    return flightNumber;
     // if the name is a terror suspect, throw an exception
     // Otherwise, return the flight number
 }
