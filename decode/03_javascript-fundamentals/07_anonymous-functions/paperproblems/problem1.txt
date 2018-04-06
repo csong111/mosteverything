@@ -6,3 +6,5 @@ function greet(x) {
 }
 
 greet(bob);
+
+function (bob) {console.log("hello " + "bob");}

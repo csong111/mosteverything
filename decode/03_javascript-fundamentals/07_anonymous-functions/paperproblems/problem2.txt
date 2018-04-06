@@ -12,3 +12,6 @@ function call(f) {
 }
 
 call(greet);
+
+
+var callgreet = function(f) {f("bob");}(function (x) {console.log("hello " + x);});
