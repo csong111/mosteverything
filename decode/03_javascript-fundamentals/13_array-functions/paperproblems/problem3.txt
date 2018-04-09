@@ -9,5 +9,6 @@ var animals = [
 
 var animalNames = animals.map(
                     function(animal) {return animal.name});
-
+animalNames = [Nacho, Ramses, Flufftail, Popcorn, Neckbeard, ]
 console.log(animalNames.join());
+Nacho,Ramses,Flufftail,Popcorn,Neckbeard,
