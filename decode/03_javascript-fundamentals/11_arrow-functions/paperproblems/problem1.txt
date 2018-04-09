@@ -3,17 +3,17 @@ For each of the following expressions:
  - If it doesn't have a syntax error, what are the probable input and output types of the function?
 
 a) x => x + 1
-
+no. input number, output undefined.
 b) x, y => x * y
-
+yes, should be (x, y) on the left side
 c) x => { x * 2 }
-
+no. input number, output undefined.
 d) (x, z) => {console.log(z); return x * z}
-
+no. intput & output type is number.
 e) x => console.log(z); return x * z
-
+yes, should be {console.log(z); return x*z}
 f) (x) => x * 2
-
+no. input number, output undefined.
 e) () => console.log("hello")
-
+no. input undefined, output undefined.
 When you're done, check all your answers in the developer console.
