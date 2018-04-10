@@ -31,7 +31,7 @@ function greetLong(lst) {
     // For example: greeLong(["bob", "daniel"]) returns ["Hello daniel"]
 
 function allLong(lst) {
-   return check = lst.every(x => x.length >= 5);
+   return newLst = lst.every(x => x.length >= 5);
 }
 // lst is an array of strings
 // Returns true if every element of lst is of length at least 5. Otherwise returns false.
