@@ -26,7 +26,7 @@ function helloMessage () {
     button.remove();
     bod.addEventListener('click', youWin);
     bod.addEventListener('keypress', youWin2);
-    setTimeout(youFail, 1000);
+    setTimeout(youFail, 500);
 }
 
 function startMessage () {
