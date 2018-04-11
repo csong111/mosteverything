@@ -10,6 +10,7 @@ function reload () {
     window.location.reload();
 }
 function youWin(clickedButton) {
+    event.stopPropagation();
     buttonClicked=true;
     clickedButton.remove();
     count ++;
@@ -26,7 +27,6 @@ function youWin(clickedButton) {
 function noDice() {
     if (buttonsClicked == false) {
         clam.innerText="better luck next time... or not!"
-        buttons.forEach(() => removeEventListener('click', youWin(clickedButton)));
         bod.appendChild(reset);
         reset.innerText="dare to play again?"
         reset.style.backgroundColor='pink';
@@ -35,6 +35,7 @@ function noDice() {
 };
 var buttons = []
 function makeButton () {
+    event.stopPropagation();
     for (let i=0; i<5; i++) {
         buttons[i]=document.createElement('button');
         startButton.remove();
@@ -45,7 +46,7 @@ function makeButton () {
         buttons[i].style.top=Math.random()*600+1+"px";
         buttons[i].style.position='absolute';
         bod.appendChild(buttons[i]);
-        bod.addEventListener('click', event => noDice)
+        bod.addEventListener('click', noDice)
         buttons[i].addEventListener('click', () => youWin(buttons[i]));};
         setTimeout(noDice, 9000);
 }
