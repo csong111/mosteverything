@@ -10,7 +10,6 @@ function reload () {
 }
 
 function youWin() {
-    buttons.forEach(remove());
     count ++;
     if (count == 5) {
     buttonsClicked = true;
@@ -29,7 +28,6 @@ function noDice() {
         bod.appendChild(reset);
         reset.innerText="dare to play again?"
         reset.style.backgroundColor='pink';
-        reset.style.color='black';
         reset.addEventListener('click', reload);
     }
 };
