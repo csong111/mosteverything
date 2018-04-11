@@ -10,7 +10,7 @@ function reload () {
 }
 
 function youWin() {
-    buttons.remove();
+    buttons.forEach(remove());
     count ++;
     if (count == 5) {
     buttonsClicked = true;
