@@ -2,14 +2,35 @@ var bod=document.getElementById("bod");
 var clam=document.getElementById("clam");
 var buttonsClicked=false;
 
+var count=0;
+var reset = document.createElement('button');
+
+function reload () {
+    window.location.reload();
+}
+
 function youWin() {
-    buttonsClicked=true;
+    buttons.remove();
+    count ++;
+    if (count == 5) {
+    buttonsClicked = true;
     clam.innerText="you're so naughty!";
+    bod.appendChild(reset);
+    reset.innerText="dare to play again?"
+    reset.style.backgroundColor='pink';
+    reset.style.color='black';
+    reset.addEventListener('click', reload);
+};
 };
 function noDice() {
     if (buttonsClicked == false) {
         clam.innerText="better luck next time... or not!"
-        buttons[i].removeEventListener('click', youWin);
+        buttons.forEach(() => removeEventListener('click', youWin));
+        bod.appendChild(reset);
+        reset.innerText="dare to play again?"
+        reset.style.backgroundColor='pink';
+        reset.style.color='black';
+        reset.addEventListener('click', reload);
     }
 };
 var buttons = []
@@ -25,8 +46,7 @@ function makeButton () {
         buttons[i].style.position='absolute';
         buttons[i].addEventListener('click', youWin);
         bod.appendChild(buttons[i]);};
-        buttons=buttons+buttons[i];
-        setTimeout(noDice, 3000);
+        setTimeout(noDice, 7000);
 }
 
 var startButton=document.createElement('button');
