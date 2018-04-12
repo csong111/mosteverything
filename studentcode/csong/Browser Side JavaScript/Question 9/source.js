@@ -5,11 +5,15 @@ var audio = new Audio('gonghit.mp3');
 var began = false;
 var resetButton = document.createElement('button');
 mug.style.backgroundImage = "url('emerald_site.gif')";
+var leftAvatar = document.getElementsByClassName('leftAvatar')[0];
+var rightAvatar = document.getElementsByClassName('rightAvatar')[0];
 
 function playNoise () {
     cup.innerText="GAME STARTING \nPlayer 1: press Q. \nPlayer 2: press P.";
     audio.play();
     began = true;
+    leftAvatar.className="leftAvatar";
+    rightAvatar.className="rightAvatar";
 };
 
 var noiseTimeout = setTimeout(playNoise, randomTime);
@@ -36,8 +40,8 @@ function verifyPress(x){
     }
     mug.removeEventListener('keydown', verifyPress);
     mug.appendChild(resetButton); 
-    resetButton.innerText="play again?";
-    resetButton.style.color='#CAF5D9';
+    resetButton.innerText="try again?";
+    resetButton.style.color='coral';
     resetButton.style.backgroundSize='large';
     resetButton.style.backgroundColor='black';
     resetButton.className='butty';
