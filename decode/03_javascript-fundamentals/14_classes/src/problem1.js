@@ -5,7 +5,7 @@ class Dog {
         this.breed = breed;
     }
     bark () {
-        return "woof!";
+        return "woof!"
     }
     // Dog has a constructor with three arguments (in this order): age, name and breed
     // Dog has three attributes: age, name and breed
