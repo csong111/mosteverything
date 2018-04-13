@@ -1,12 +1,14 @@
 var mug = document.getElementById('mug');
 var cup = document.getElementById('cup')
 var randomTime = 1000*Math.round((Math.random()*(8-2)+2));
-var audio = new Audio('gonghit.mp3');
+var audio = new Audio('punch.mp3');
 var began = false;
 var resetButton = document.createElement('button');
 mug.style.backgroundImage = "url('emerald_site.gif')";
 var leftAvatar = document.getElementsByClassName('leftAvatar')[0];
 var rightAvatar = document.getElementsByClassName('rightAvatar')[0];
+var loseNoise = new Audio('aww.mp3');
+var winNoise = new Audio('whistle.mp3');
 
 function playNoise () {
     cup.innerText="GAME STARTING \nPlayer 1: press Q. \nPlayer 2: press P.";
@@ -25,17 +27,21 @@ function verifyPress(x){
     if(!began) {
         if (x.keyCode === 81) {
             cup.innerText="Player 1: the earlybird does NOT get the worm.";
+            loseNoise.play();
         }
         if (x.keyCode === 80) {
             cup.innerText="Player 2: you would've been disqualified if you were in the Olympics.";
+            loseNoise.play();
         }
     }
     else {
         if (x.keyCode === 81) {
             cup.innerText="Player 1: surprisingly, you won this time!";
+            winNoise.play();
         }
         if (x.keyCode === 80){
             cup.innerText="Player 2: this isn't a real game, though!";
+            winNoise.play();
         }
     }
     mug.removeEventListener('keydown', verifyPress);
