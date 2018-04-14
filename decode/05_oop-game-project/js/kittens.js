@@ -1,13 +1,13 @@
 // This sectin contains some game constants. It is not super interesting
-var GAME_WIDTH = 375;
-var GAME_HEIGHT = 500;
+var GAME_WIDTH = window.innerWidth;
+var GAME_HEIGHT = window.innerHeight;
 
 var ENEMY_WIDTH = 75;
 var ENEMY_HEIGHT = 156;
 var MAX_ENEMIES = 3;
 
-var PLAYER_WIDTH = 75;
-var PLAYER_HEIGHT = 54;
+var PLAYER_WIDTH = 213;
+var PLAYER_HEIGHT = 140;
 
 // These two constants keep us from using "magic numbers" in our code
 var LEFT_ARROW_CODE = 37;
@@ -17,21 +17,27 @@ var RIGHT_ARROW_CODE = 39;
 var MOVE_LEFT = 'left';
 var MOVE_RIGHT = 'right';
 
+var app = document.getElementById('app');
+var button = document.createElement('button');
+button.innerText="try again?";
+
 // Preload game images
 var images = {};
-['enemy.png', 'stars.png', 'player.png'].forEach(imgName => {
+['enemy.png', 'background.jpg', 'snake2.png'].forEach(imgName => {
     var img = document.createElement('img');
     img.src = 'images/' + imgName;
     images[imgName] = img;
 });
 
-
-
-
-
 // This section is where you will be doing most of your coding
-class Enemy {
+class Entity {
+    render(ctx) {
+        ctx.drawImage(this.sprite, this.x, this.y);
+    }
+}
+class Enemy extends Entity {
     constructor(xPos) {
+        super();
         this.x = xPos;
         this.y = -ENEMY_HEIGHT;
         this.sprite = images['enemy.png'];
@@ -43,17 +49,14 @@ class Enemy {
     update(timeDiff) {
         this.y = this.y + timeDiff * this.speed;
     }
-
-    render(ctx) {
-        ctx.drawImage(this.sprite, this.x, this.y);
-    }
 }
 
-class Player {
+class Player extends Entity {
     constructor() {
+        super();
         this.x = 2 * PLAYER_WIDTH;
         this.y = GAME_HEIGHT - PLAYER_HEIGHT - 10;
-        this.sprite = images['player.png'];
+        this.sprite = images['snake2.png'];
     }
 
     // This method is called by the game engine when left/right arrows are pressed
@@ -65,15 +68,7 @@ class Player {
             this.x = this.x + PLAYER_WIDTH;
         }
     }
-
-    render(ctx) {
-        ctx.drawImage(this.sprite, this.x, this.y);
-    }
 }
-
-
-
-
 
 /*
 This section is a tiny game engine.
@@ -120,10 +115,9 @@ class Engine {
 
         var enemySpot;
         // Keep looping until we find a free enemy spot at random
-        while (!enemySpot || this.enemies[enemySpot]) {
+        while (enemySpot === undefined || this.enemies[enemySpot]) {
             enemySpot = Math.floor(Math.random() * enemySpots);
         }
-
         this.enemies[enemySpot] = new Enemy(enemySpot * ENEMY_WIDTH);
     }
 
@@ -167,7 +161,7 @@ class Engine {
         this.enemies.forEach(enemy => enemy.update(timeDiff));
 
         // Draw everything!
-        this.ctx.drawImage(images['stars.png'], 0, 0); // draw the star bg
+        this.ctx.drawImage(images['background.jpg'], -800, -800); // draw the star bg
         this.enemies.forEach(enemy => enemy.render(this.ctx)); // draw the enemies
         this.player.render(this.ctx); // draw the player
 
@@ -182,13 +176,13 @@ class Engine {
         // Check if player is dead
         if (this.isPlayerDead()) {
             // If they are dead, then it's game over!
-            this.ctx.font = 'bold 30px Impact';
+            this.ctx.font = 'bold 30px Courier New';
             this.ctx.fillStyle = '#ffffff';
-            this.ctx.fillText(this.score + ' GAME OVER', 5, 30);
+            this.ctx.fillText(this.score + ' try harder next time!', 5, 30);
         }
         else {
             // If player is not dead, then draw the score
-            this.ctx.font = 'bold 30px Impact';
+            this.ctx.font = 'bold 30px Courier New';
             this.ctx.fillStyle = '#ffffff';
             this.ctx.fillText(this.score, 5, 30);
 
@@ -199,14 +193,13 @@ class Engine {
     }
 
     isPlayerDead() {
-        // TODO: fix this function!
-        return false;
+        var dead = false
+        this.enemies.forEach((enemies)=> {
+            if (this.player.x <= enemies.x && enemies.x <= (this.player.x + PLAYER_WIDTH) && enemies.y > this.player.y ) dead = true;
+        });
+        return dead;
     }
 }
-
-
-
-
 
 // This section will start the game
 var gameEngine = new Engine(document.getElementById('app'));
