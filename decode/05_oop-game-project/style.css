@@ -3,4 +3,35 @@ canvas {
     background-repeat: no-repeat;
     width: 100%;
     height: 100%;
+    cursor: url('images/smoker.cur'), auto;
+}
+
+.resetButton {
+    position: absolute;
+    top: 86%;
+    left: 50%;
+    transform: translate(-54%, -10%);
+    margin: 10px;
+    padding: 10px;
+    font-size: 20px;
+    background-color:#C3B4CB;
+    font-family: 'Courier New';
+    font-weight: bold;
+    cursor: url('images/smoker.cur'), auto;
+}
+
+#bod {
+    overflow: hidden;
+    width: 100%;
+}
+
+.pauseButton {
+    position: absolute;
+    bottom: 95%;
+    left: 92%;
+    font-family: 'Courier New';
+    font-weight: bold;
+    color: white;
+    background-color: #C67B76;
+    cursor: url('images/smoker.cur'), auto;
 }

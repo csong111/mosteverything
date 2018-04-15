@@ -2,28 +2,40 @@
 var GAME_WIDTH = window.innerWidth;
 var GAME_HEIGHT = window.innerHeight;
 
-var ENEMY_WIDTH = 75;
-var ENEMY_HEIGHT = 156;
+var ENEMY_WIDTH = 135;
+var ENEMY_HEIGHT = 120;
 var MAX_ENEMIES = 3;
 
-var PLAYER_WIDTH = 213;
-var PLAYER_HEIGHT = 140;
+var PLAYER_WIDTH = 128;
+var PLAYER_HEIGHT = 117;
 
 // These two constants keep us from using "magic numbers" in our code
 var LEFT_ARROW_CODE = 37;
 var RIGHT_ARROW_CODE = 39;
+var DOWN_ARROW_CODE = 40;
+var UP_ARROW_CODE = 38;
 
 // These two constants allow us to DRY
 var MOVE_LEFT = 'left';
 var MOVE_RIGHT = 'right';
+var MOVE_DOWN = 'down';
+var MOVE_UP = 'up';
 
 var app = document.getElementById('app');
 var button = document.createElement('button');
-button.innerText="try again?";
+button.innerText="ready to try harder?";
+button.className="resetButton";
+button.onclick = function () {window.location.reload();};
+
+var backgroundSound = new Audio('background.mp3');
+var pauseButton = document.createElement('button');
+pauseButton.innerText="~pause music~";
+pauseButton.className="pauseButton";
+pauseButton.onclick = function () {backgroundSound.pause()}
 
 // Preload game images
 var images = {};
-['enemy.png', 'background.jpg', 'snake2.png'].forEach(imgName => {
+['brain2.png', 'background.jpg', 'knife4.png'].forEach(imgName => {
     var img = document.createElement('img');
     img.src = 'images/' + imgName;
     images[imgName] = img;
@@ -40,7 +52,7 @@ class Enemy extends Entity {
         super();
         this.x = xPos;
         this.y = -ENEMY_HEIGHT;
-        this.sprite = images['enemy.png'];
+        this.sprite = images['knife4.png'];
 
         // Each enemy should have a different speed
         this.speed = Math.random() / 2 + 0.25;
@@ -56,7 +68,7 @@ class Player extends Entity {
         super();
         this.x = 2 * PLAYER_WIDTH;
         this.y = GAME_HEIGHT - PLAYER_HEIGHT - 10;
-        this.sprite = images['snake2.png'];
+        this.sprite = images['brain2.png'];
     }
 
     // This method is called by the game engine when left/right arrows are pressed
@@ -66,6 +78,12 @@ class Player extends Entity {
         }
         else if (direction === MOVE_RIGHT && this.x < GAME_WIDTH - PLAYER_WIDTH) {
             this.x = this.x + PLAYER_WIDTH;
+        }
+        else if (direction === MOVE_UP && this.y > 0) {
+            this.y = this.y - PLAYER_HEIGHT;
+        }
+        else if (direction === MOVE_DOWN && this.y < GAME_HEIGHT - PLAYER_HEIGHT) {
+            this.y = this.y + PLAYER_HEIGHT;
         }
     }
 }
@@ -85,8 +103,8 @@ class Engine {
 
         // Setup the <canvas> element where we will be drawing
         var canvas = document.createElement('canvas');
-        canvas.width = GAME_WIDTH;
-        canvas.height = GAME_HEIGHT;
+        canvas.width = window.innerWidth;
+        canvas.height = window.innerHeight;
         element.appendChild(canvas);
 
         this.ctx = canvas.getContext('2d');
@@ -125,6 +143,8 @@ class Engine {
     start() {
         this.score = 0;
         this.lastFrame = Date.now();
+        backgroundSound.play();
+        app.appendChild(pauseButton);
 
         // Listen for keyboard left/right and update the player
         document.addEventListener('keydown', e => {
@@ -133,6 +153,12 @@ class Engine {
             }
             else if (e.keyCode === RIGHT_ARROW_CODE) {
                 this.player.move(MOVE_RIGHT);
+            }
+            else if (e.keyCode === DOWN_ARROW_CODE) {
+                this.player.move(MOVE_DOWN);
+            }
+            else if(e.keyCode === UP_ARROW_CODE) {
+                this.player.move(MOVE_UP);
             }
         });
 
@@ -179,6 +205,7 @@ class Engine {
             this.ctx.font = 'bold 30px Courier New';
             this.ctx.fillStyle = '#ffffff';
             this.ctx.fillText(this.score + ' try harder next time!', 5, 30);
+            app.appendChild(button);
         }
         else {
             // If player is not dead, then draw the score
@@ -195,7 +222,7 @@ class Engine {
     isPlayerDead() {
         var dead = false
         this.enemies.forEach((enemies)=> {
-            if (this.player.x <= enemies.x && enemies.x <= (this.player.x + PLAYER_WIDTH) && enemies.y > this.player.y ) dead = true;
+            if (this.player.x <= enemies.x && enemies.x <= (this.player.x + 0.5*PLAYER_WIDTH) && enemies.y >= this.player.y) dead = true;
         });
         return dead;
     }
