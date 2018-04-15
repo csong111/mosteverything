@@ -8,8 +8,8 @@ canvas {
 
 .resetButton {
     position: absolute;
-    top: 86%;
-    left: 50%;
+    top: 80.5%;
+    left: 49%;
     transform: translate(-54%, -10%);
     margin: 10px;
     padding: 10px;
@@ -22,13 +22,12 @@ canvas {
 
 #bod {
     overflow: hidden;
-    width: 100%;
 }
 
 .pauseButton {
     position: absolute;
     bottom: 95%;
-    left: 92%;
+    left: 91%;
     font-family: 'Courier New';
     font-weight: bold;
     color: white;

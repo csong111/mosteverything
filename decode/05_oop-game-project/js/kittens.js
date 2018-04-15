@@ -3,7 +3,7 @@ var GAME_WIDTH = window.innerWidth;
 var GAME_HEIGHT = window.innerHeight;
 
 var ENEMY_WIDTH = 135;
-var ENEMY_HEIGHT = 120;
+var ENEMY_HEIGHT = 50;
 var MAX_ENEMIES = 3;
 
 var PLAYER_WIDTH = 128;
