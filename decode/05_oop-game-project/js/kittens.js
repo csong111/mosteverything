@@ -2,7 +2,7 @@
 var GAME_WIDTH = window.innerWidth;
 var GAME_HEIGHT = window.innerHeight;
 
-var ENEMY_WIDTH = 135;
+var ENEMY_WIDTH = 128;
 var ENEMY_HEIGHT = 117;
 var MAX_ENEMIES = 3;
 
@@ -10,7 +10,7 @@ var BONUS_WIDTH = 128;
 var BONUS_HEIGHT = 117;
 var MAX_BONUS = 1;
 
-var PLAYER_WIDTH = 128;
+var PLAYER_WIDTH = 125;
 var PLAYER_HEIGHT = 100;
 
 // These two constants keep us from using "magic numbers" in our code
@@ -256,22 +256,22 @@ class Engine {
         this.setupBonus();
 
         if (this.verifyBonusPoints()) {
+            this.score += 10000;
+            beerSound.play();
             this.ctx.font = 'bold 30px Courier New'
             this.ctx.fillStyle = '#FFFFAF';
-            this.ctx.fillText(this.score + ': bonus points added!', 5, 30);
-            beerSound.play();
-
+            this.ctx.fillText('10000 bonus points!', 5, 50);
             //this.lastFrame = Date.now();
             //requestAnimationFrame(this.gameLoop);
         }
 
         if (this.isPlayerDead()) {
             // If they are dead, then it's game over!
+            lostSound.play();
             this.ctx.font = 'bold 30px Courier New';
             this.ctx.fillStyle = '#ffffff';
             this.ctx.fillText(this.score + ': try harder next time!', 5, 30);
             app.appendChild(button);
-            lostSound.play();
         }
 
         else {

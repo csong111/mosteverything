@@ -8,15 +8,15 @@ canvas {
 
 .resetButton {
     position: absolute;
-    top: 80.5%;
+    top: 86%;
     left: 49%;
-    transform: translate(-54%, -10%);
+    transform: translate(-57%, -10%);
     margin: 10px;
     padding: 10px;
     font-size: 20px;
     background-color:#C3B4CB;
     font-family: 'Courier New';
-    font-weight: bold;
+    font-weight: bolder;
     cursor: url('images/smoker.cur'), auto;
 }
 
