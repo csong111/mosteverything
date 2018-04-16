@@ -10,7 +10,7 @@ var BONUS_WIDTH = 128;
 var BONUS_HEIGHT = 117;
 var MAX_BONUS = 1;
 
-var PLAYER_WIDTH = 125;
+var PLAYER_WIDTH = 126;
 var PLAYER_HEIGHT = 100;
 
 // These two constants keep us from using "magic numbers" in our code
@@ -39,6 +39,8 @@ pauseButton.onclick = function () {backgroundSound.pause()}
 
 var lostSound = new Audio('sounds/damndudethatsuck.mp3');
 var beerSound = new Audio('sounds/slurp.mp3');
+
+var count = 3;
 
 // Preload game images
 var images = {};
@@ -98,7 +100,7 @@ class Player extends Entity {
         if (direction === MOVE_LEFT && this.x > 0) {
             this.x = this.x - PLAYER_WIDTH;
         }
-        else if (direction === MOVE_RIGHT && this.x < GAME_WIDTH - PLAYER_WIDTH) {
+        else if (direction === MOVE_RIGHT && this.x < GAME_WIDTH - PLAYER_WIDTH -24) {
             this.x = this.x + PLAYER_WIDTH;
         }
         else if (direction === MOVE_UP && this.y > 0) {
@@ -264,8 +266,16 @@ class Engine {
             //this.lastFrame = Date.now();
             //requestAnimationFrame(this.gameLoop);
         }
-
         if (this.isPlayerDead()) {
+                count--;
+                if (count === 0) {
+                    console.log(count);
+                    delete this.enemies[i];
+                    this.ctx.font = 'bold 30px Courier New';
+                    this.ctx.fillStyle = '#ffffff';
+                    this.ctx.fillText('no more lives', 5, 60);
+    
+                }
             // If they are dead, then it's game over!
             lostSound.play();
             this.ctx.font = 'bold 30px Courier New';
@@ -279,6 +289,7 @@ class Engine {
             this.ctx.font = 'bold 30px Courier New';
             this.ctx.fillStyle = '#ffffff';
             this.ctx.fillText(this.score, 5, 30);
+            //this.enemies.speed *= 20;
 
             // Set the time marker and redraw
             this.lastFrame = Date.now();
@@ -297,7 +308,7 @@ class Engine {
     verifyBonusPoints () {
         var bonusGained = false;
         this.bonus.forEach ((bonus) => {
-            if (this.player.x <= bonus.x && bonus.x <= (this.player.x + 0.5*BONUS_WIDTH) && bonus.y >= (this.player.y - PLAYER_HEIGHT) && this.player.y >= bonus.y) bonusGained = true;
+            if (this.player.x <= bonus.x && bonus.x <= (this.player.x + BONUS_WIDTH) && bonus.y >= (this.player.y - PLAYER_HEIGHT) && this.player.y >= bonus.y) bonusGained = true;
         });
         return bonusGained;
     }
