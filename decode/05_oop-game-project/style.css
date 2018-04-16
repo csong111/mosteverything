@@ -1,8 +1,8 @@
 canvas {
     background-size: 100% 100%;
     background-repeat: no-repeat;
-    width: 100%;
-    height: 100%;
+    width: 99%;
+    height: 80%;
 }
 
 .resetButton {
@@ -20,6 +20,10 @@ canvas {
 
 #bod {
     overflow: hidden;
+    background-size: cover;
+    width: 100%;
+    height: 100%;
+    background-repeat: no-repeat;    
 }
 
 .pauseButton {
@@ -30,4 +34,12 @@ canvas {
     font-weight: bold;
     color: white;
     background-color: #C67B76;
+}
+
+.beginButton {
+    position: absolute;
+    left: 51%;
+    top: 44%;
+    background-color: black;
+    color: #B6E2FF;
 }
