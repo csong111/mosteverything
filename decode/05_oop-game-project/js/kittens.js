@@ -12,7 +12,6 @@ var MAX_BONUS = 1;
 
 var SHOOTER_WIDTH = 128;
 var SHOOTER_HEIGHT = 117;
-var MAX_SHOOTER = 2;
 
 var PLAYER_WIDTH = 126;
 var PLAYER_HEIGHT = 100;
@@ -22,7 +21,7 @@ var LEFT_ARROW_CODE = 37;
 var RIGHT_ARROW_CODE = 39;
 var DOWN_ARROW_CODE = 40;
 var UP_ARROW_CODE = 38;
-var SHIFT_ARROW_CODE = 16;
+var SPACE_CODE = 32;
 
 // These two constants allow us to DRY
 var MOVE_LEFT = 'left';
@@ -71,16 +70,17 @@ class Entity {
 //Making a shooter that shoots pills and destroys knives
 
 class Shooter extends Entity {
-    constructor(xVal) {
+    constructor(xVal, yVal) {
         super();
         this.x = xVal;
         this.y = yVal;
         this.sprite = images['pills.png'];
-        this.speed = (Math.random() / 2 + 0.25)*Enemy_Speed_Ratio;
+        this.speed = 2*Enemy_Speed_Ratio;
      }
      update(timeDiff) {
-         this.y = this.y + timeDiff * this.speed;
+         this.y = this.y - timeDiff * this.speed;
      }
+    
 }
 //Making a bonus entity that gives bonus points
 
@@ -245,7 +245,7 @@ class Engine {
             else if(e.keyCode === UP_ARROW_CODE) {
                 this.player.move(MOVE_UP);
             }
-            else if(e.keyCode === SHIFT_ARROW_CODE) {
+            else if(e.keyCode === SPACE_CODE) {
                 this.addShooter();
             }
         });
@@ -277,11 +277,15 @@ class Engine {
         //Call update on bonus
         this.bonus.forEach(bonus => bonus.update(timeDiff));
 
+        //Call update on shooter
+        this.shooter.forEach(shooter => shooter.update(timeDiff));
+
         // Draw everything!
         this.ctx.drawImage(images['background.jpg'], -800, -800); // draw the star bg
         this.enemies.forEach(enemy => enemy.render(this.ctx)); // draw the enemies
         this.bonus.forEach(bonus => bonus.render(this.ctx)); // draw the bonus
         this.player.render(this.ctx); // draw the player
+        this.shooter.forEach(shooter => shooter.render(this.ctx)); //draw the shooter
 
         // Check if any enemies should die
         this.enemies.forEach((enemy, enemyIdx) => {
@@ -299,6 +303,14 @@ class Engine {
         });
         this.setupBonus();
 
+        //Check if any shooter should die
+        this.shooter.forEach((shooter, shooterIdx) => {
+            if (shooter.y < 0) {
+                delete this.shooter[shooterIdx];
+            }
+        });
+        this.setupShooter();
+
         if (this.verifyBonusPoints()) {
             this.score += 10000;
             beerSound.play();
@@ -311,6 +323,17 @@ class Engine {
             //this.lastFrame = Date.now();
             //requestAnimationFrame(this.gameLoop);
         }
+
+        this.enemies.forEach((enemy, enemyIdx) => {
+            this.shooter.forEach((shooter, shooterIdx) => {
+                if (this.isEnemyDead(enemy, shooter)) {
+                    delete this.enemies[enemyIdx];
+                    delete this.shooter[shooterIdx];
+                }
+            })
+        })
+            //if (this.isEnemyDead(enemy, shooter)) delete this.enemies[enemyIdx]});
+
         if (this.isPlayerDead()) {
             this.ctx.drawImage(images['blood.png'], 0.95*this.player.x, (this.player.y-0.5*PLAYER_HEIGHT));
             count--;
@@ -318,9 +341,10 @@ class Engine {
                 delete this.enemies[i];
             }
             if (count === 0) {
+                lostSound.play();
                 this.ctx.font = 'bold 30px Courier New';
                 this.ctx.fillStyle = '#ffffff';
-                this.ctx.fillText('no more chances. you are expelled from the boot camp.', 5, 30);
+                this.ctx.fillText('Score: ' + this.score +'.' + ' no more chances. you are expelled from the boot camp.', 5, 30);
                 app.appendChild(button);
                 return;
                 }
@@ -328,7 +352,7 @@ class Engine {
             lostSound.play();
             this.ctx.font = 'bold 30px Courier New';
             this.ctx.fillStyle = '#ffffff';
-            this.ctx.fillText(this.score + ': try harder next time!', 5, 30);
+            this.ctx.fillText('Score: ' + this.score + '.' + ' try harder next time!', 5, 30);
             requestAnimationFrame(this.gameLoop);
         }
 
@@ -368,15 +392,14 @@ class Engine {
         });
         return bonusGained;
     }
+    //Check if pills kill knives
 
-    isEnemyDead() {
+    isEnemyDead(enemy, shooter) {
         var enemyDead = false;
-        this.shooter.forEach((shooter) => {
-            if (this.enemy.x <= shooter.x && shooter.x <= (this.enemy.x + ENEMY_WIDTH) && shooter.y >= (this.enemy.y+ENEMY_HEIGHT) && this.enemy.y <= shooter.y) enemyDead= true;
-        });
-        return enemyDead;
+            if (enemy.x -100 <= shooter.x && shooter.x <= (enemy.x + ENEMY_WIDTH + 100) && shooter.y >= (enemy.y - ENEMY_HEIGHT) && shooter.y <= enemy.y){enemyDead= true;}
+            return enemyDead;
+        };
     }
-}
 
 // This section will start the game
 startSound.play();
