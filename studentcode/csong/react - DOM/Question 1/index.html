@@ -1,0 +1,18 @@
+<html>
+    <head>
+    <script src="https://unpkg.com/react@16/umd/react.development.js"></script>
+    <script src="https://unpkg.com/react-dom@16/umd/react-dom.development.js"></script>  
+    </head>
+    <body>
+        <div id="root">
+        <script>
+        var rootdiv = document.getElementById('root');
+        var elem = React.createElement('div', null, React.createElement('div', null, React.createElement('div', null, React.createElement('a', {href: 'http://google.com'}, React.createElement('img', {src: 'https://cf.ltkcdn.net/cats/images/std/93591-283x424-BATHTIME.jpg'})))));
+        //ReactDOM.render (elem, rootdiv);
+        //var img = React.createElement('img', {src: 'https://cf.ltkcdn.net/cats/images/std/93591-283x424-BATHTIME.jpg'});
+        //var ref = React.createElement('a', {href: "healthypets.mercola.com/sites/healthypets/archive/2013/12/23/bathing-cats.aspx"}, "How to bathe a cat")
+        ReactDOM.render (elem, rootdiv);
+        </script>
+        </div>
+    </body>
+</html>

@@ -1,0 +1,24 @@
+<html>
+    <head>
+    <script src="https://unpkg.com/react@16/umd/react.development.js"></script>
+    <script src="https://unpkg.com/react-dom@16/umd/react-dom.development.js"></script>  
+    </head>
+    <body>
+        <div id="root">
+        <script>
+        class newButton extends React.Component {
+            constructor() {
+                super();
+                this.state = {count: 0}
+            }
+            render() {
+                return React.createElement('button', 
+                {onClick: () => this.setState({count: this.state.count + 1})}, this.state.count + " times");
+            }
+        }
+        var rootdiv = document.getElementById('root');    
+        ReactDOM.render(React.createElement(newButton, null), rootdiv);                   
+        </script>
+        </div>
+    </body>
+</html>

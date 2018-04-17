@@ -1,0 +1,25 @@
+<html>
+    <head>
+    <script src="https://unpkg.com/react@16/umd/react.development.js"></script>
+    <script src="https://unpkg.com/react-dom@16/umd/react-dom.development.js"></script>  
+    </head>
+    <body>
+        <div id="root">
+        <script>
+            let quotes = ["Wasabi peas", "Diet Coke", "Almond milk", "Japchae noodles", "Corn bread"]
+            class buttonAndRandom extends React.Component {
+                constructor () {
+                    super();
+                    this.state = {};
+                }
+                render() {
+                    return React.createElement('div', null, 
+                        React.createElement('button', {onClick: () => {this.setState({string: quotes[Math.floor(Math.random()*(4-0+1)+0)]})}}, "Generator"), this.state.string)
+                }
+            }
+            var rootdiv = document.getElementById('root');
+            ReactDOM.render(React.createElement(buttonAndRandom, null), rootdiv);
+        </script>    
+        </div>
+    </body>
+</html>
