@@ -30,3 +30,4 @@ const sketch = (p5) => {
     }
 }
 
+export default sketch;
