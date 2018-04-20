@@ -3,13 +3,14 @@ import logo from './logo.svg';
 import './App.css';
 
 class App extends Component {
-  constructor () {
-    super();
-    this.state={};
-  }
+  //constructor () {
+    //super();
+    //this.state={};
+  //}
+  //no need to have a constructor since we have no state
+
   click = () => {
     let inputBoxValue = document.getElementById('box').value;
-    console.log(inputBoxValue);
     if (inputBoxValue == 42) {
       alert("You guessed correctly");
     } else 

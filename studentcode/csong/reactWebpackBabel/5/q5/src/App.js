@@ -5,15 +5,15 @@ import './App.css';
 class App extends Component {
   constructor() {
     super();
-    this.state={sw: true};
+    this.state={showButton2: true};
   }
 
   click = () => {
-    this.setState({sw: !this.state.sw});
+    this.setState({showButton2: !this.state.showButton2});
   }
 
   render() {
-    if (this.state.sw == false){
+    if (this.state.showButton2 == false){
       return (<button onClick= {this.click}>Button1</button>);
     } 
     return (<button onClick={this.click}>Button2</button>);
