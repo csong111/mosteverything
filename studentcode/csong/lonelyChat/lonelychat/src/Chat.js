@@ -35,6 +35,7 @@ class Chat extends Component {
   render() {
       console.log(this.props);
     let lify = (item) => (<li>{item}</li>)
+    if(!this.props.show) return (<div>nothing to see here</div>)
     return (
       <div>
       Enter name & start chatting:
