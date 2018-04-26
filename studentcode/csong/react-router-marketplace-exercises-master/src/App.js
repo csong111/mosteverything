@@ -71,6 +71,7 @@ let renderAllItems = () => {
     listOfReviews={item.listOfReviews} />))
 }
 
+
 let renderSeller = routerData => {
   // the .id is the same as the :id from the Route below. 
   // You can give it any name, but they have to match.
