@@ -11,4 +11,4 @@ for(var k in address) {
 }
 
 console.log(both["jack"].age)
-console.log(both.jane["address"])
+console.log(both.jane["address"])  
