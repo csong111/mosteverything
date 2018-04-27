@@ -4,6 +4,7 @@
 
 var assert = require('assert');
 var price = { 123: 10 }
+var description = {123: "a nice racket", 456: "a luxurious purse"}
 
 var both = {}
 

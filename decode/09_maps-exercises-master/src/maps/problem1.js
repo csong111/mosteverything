@@ -3,7 +3,8 @@
 // Don't forget that the assert npm package needs to be installed
 
 var assert = require('assert');
-var age = { "jane": 28 }
+var age = { "jane": 28, "jack": 32}
+var address = {"jane": "123 elm street", "jack": "234 helm street"}
 
 var both = {}
 
