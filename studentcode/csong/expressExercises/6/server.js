@@ -4,7 +4,8 @@ var bodyParser=require('body-parser')
 app.use(bodyParser.raw({type: '*/*'}))
 
 app.post('/blast', (req, res) =>{
-    if (JSON.parse(req.body).username === 'foo' & JSON.parse(req.body).password === 'bar') {
+    let contents = JSON.parse(req.body); //store JSON.parse(req.body) to not slow down the conditional evaluation
+    if (contents.username === 'foo' && contents.password === 'bar') {
         res.send('success')
     }
     else res.send('failure')
