@@ -8,6 +8,7 @@ app.get('/sum', (req, res) => {
     for (let i=0; i < r.length; i++) {
         sum = sum + Number(r[i]);
     }
+    //alternately, let sum = r.reduce((a,b)=>a+b, 0)
     res.send('<div>' + sum + '</div>');
 })
 
