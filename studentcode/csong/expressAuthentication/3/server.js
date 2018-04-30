@@ -29,7 +29,7 @@ Sign-up:
 
 app.get('/', (req, res) => res.send(webpage));
 
-info=fs.readFileSync('login.txt');
+let info = fs.readFileSync('login.txt');
 app.post('/signup', (req, res) => {
     info[req.body.newUser]=req.body.newPass;
     fs.writeFileSync('login.txt', JSON.stringify(info))
