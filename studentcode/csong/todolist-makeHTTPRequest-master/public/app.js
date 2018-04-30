@@ -7,14 +7,14 @@ function inputChanged() {
 
 // Don't try to understand the body of this function. You just 
 // need to understand what each parameter represents
-function makeHTTPRequest(meth, path, body, cb) {
-    fetch(path, {
-        body: body,
-        method: meth
-    })
-        .then(response => response.text())
-        .then(responseBody => cb ? cb(responseBody) : undefined)
-}
+//function makeHTTPRequest(meth, path, body, cb) {
+    //fetch(path, {
+        //body: body,
+        //method: meth
+    //})
+        //.then(response => response.text())
+        //.then(responseBody => cb ? cb(responseBody) : undefined)
+//}
 
 // We're going to try and stick with React's way of doing things
 let state = { items: [], formInput: "" }
@@ -41,29 +41,54 @@ function setState(newState) {
     rerender();
 }
 
+let cb = (itemsFromServer) => {
+    let parsedItems = JSON.parse(itemsFromServer)
+    setState({ items: parsedItems })
+}
+
 function sendItemToServer(item) {
-    // This function is so short it could be inlined
-    let cb = (itemsFromServer) => {
-        let parsedItems = JSON.parse(itemsFromServer)
-        setState({ items: parsedItems })
-    }
-    makeHTTPRequest('POST', '/addItem', JSON.stringify(item), cb)
+    //makeHTTPRequest('POST', '/addItem', JSON.stringify(item), cb)
+    fetch('/addItem', {
+        body: JSON.stringify(item),
+        method: 'POST'
+    })
+    .then(response=>response.text())
+    .then(cb)
 }
 
 // When you submit the form, it sends the item to the server
 function submitForm() {
     event.preventDefault();
     sendItemToServer(state.formInput);
+    setState({formInput: " "});
 }
 
 // When the client starts he needs to populate the list of items
 function getAllItems() {
-    let cb = (itemsFromServer) => {
-        let parsedItems = JSON.parse(itemsFromServer)
-        setState({ items: parsedItems })
-    }
-    makeHTTPRequest('GET', '/items', undefined, cb)
+    //makeHTTPRequest('GET', '/items', undefined, cb)
+    fetch('/items', {
+        method: 'GET'
+    })
+    .then(response=>response.text())
+    .then(cb)
 }
 
+function clearList () {
+    //makeHTTPRequest('GET', '/cleared', undefined, cb)
+    fetch('/cleared', {
+        method: 'GET'
+    })
+    .then(response=>response.text())
+    .then(cb)
+}
+
+function reverseList () {
+    //makeHTTPRequest('GET', '/reversed', undefined, cb)
+    fetch('/reversed', {
+        method: 'GET'
+    })
+    .then(response=>response.text())
+    .then(cb)
+}
 // We define a function and then call it right away. I did this to structure the file.
 getAllItems();

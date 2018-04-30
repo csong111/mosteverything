@@ -27,4 +27,12 @@ app.post('/addItem', (req, res) => {
     res.send(JSON.stringify(serverState.items));
 })
 
+app.get('/cleared', (req, res) => {
+    res.send(JSON.stringify(serverState.items=[]));
+})
+
+app.get('/reversed', (req, res) => {
+    res.send(JSON.stringify(serverState.items.reverse()));
+})
+
 app.listen(3000, () => console.log('Example app listening on port 3000!'))
