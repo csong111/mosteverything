@@ -22,7 +22,6 @@ class ToDoList extends Component {
           .then(response => response.text()) // get the HTTP response body
           .then(responseBody => {
             let parsedResponseBody = JSON.parse(responseBody);
-            console.log(parsedResponseBody)
             this.setState({ items: parsedResponseBody })
           })
       }
