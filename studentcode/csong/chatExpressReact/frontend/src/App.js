@@ -21,7 +21,7 @@ class App extends Component {
     let body = JSON.stringify({name: this.state.name, input: this.state.input})
     let cb = (respB) => {
       let parsedB = JSON.parse(respB)
-      console.log(respB)
+      //console.log(respB)
       this.setState({msgs: parsedB})
     }
     fetch ('/getMsgs', {
@@ -32,6 +32,10 @@ class App extends Component {
   }
 
   setName = (event) => {
+    let body = JSON.stringify({})
+    fetch ('/signin', {
+      method: 'POST'
+    })
     this.setState({nameExists: true})
   }
 
@@ -43,7 +47,8 @@ class App extends Component {
     return (
       <div>
         <form onSubmit={this.setName}>
-        <input type="text" value={this.state.name} onChange={this.handleName} placeholder="choose your username"/>
+        <input type="text" value={this.state.name} onChange={this.handleName} name="username" placeholder="enter your username"/>
+        <input type="text" onChange={this.handlePW} password="password" placeholder="password"/>
         <input type="submit"/>
         </form> 
       </div>
