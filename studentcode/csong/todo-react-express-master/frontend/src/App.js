@@ -4,10 +4,6 @@ import './App.css';
 import ToDoList from './ToDoList.js'
 
 class App extends Component {
-  constructor(props) {
-    super(props);
-  }
-
   render() {
     return (
       <div style={{display:"flex"}}>
