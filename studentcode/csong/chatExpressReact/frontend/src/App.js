@@ -7,9 +7,14 @@ class App extends Component {
     super();
     this.state = {
       msgs: [],
-      name: '',
       input: '',
-      nameExists: false
+      loggedIn: false,
+      name: '',
+      accountExists: false,
+      passwordWrong: false,
+      sessionID: '',
+      missingSignUp: false,
+      badSignIn: false
     }
   }
 
@@ -18,11 +23,10 @@ class App extends Component {
   }
 
   getMsgs = () => {
-    let body = JSON.stringify({name: this.state.name, input: this.state.input})
+    let body = JSON.stringify({sessionID: this.state.sessionID})
     let cb = (respB) => {
       let parsedB = JSON.parse(respB)
-      //console.log(respB)
-      this.setState({msgs: parsedB})
+      if(parsedB !== 'fail') this.setState({msgs: parsedB});
     }
     fetch ('/getMsgs', {
       method: 'POST',
@@ -31,25 +35,70 @@ class App extends Component {
       .then(cb)
   }
 
-  setName = (event) => {
-    let body = JSON.stringify({})
+  handleLogin = (event) => {
+    event.preventDefault();
+    let body = JSON.stringify({name: this.state.nameInput, pw: this.state.pwInput})
+    let cb = (resB) => {
+      let parsed = JSON.parse(resB)
+      if (parsed === 'Incorrect credentials') this.setState({badSignIn: true})
+      else if (parsed === 'login failed') this.setState({passwordWrong: true})
+      else this.setState({loggedIn: true, name: this.state.nameInput, sessionID: parsed})
+    }
     fetch ('/signin', {
-      method: 'POST'
-    })
-    this.setState({nameExists: true})
+      method: 'POST',
+      body: body
+    }).then(res=>res.text())
+      .then(cb)
   }
 
   handleName = (event) => {
+    this.setState({nameInput: event.target.value})
+  }
+
+  handlePW = (event) => {
+    this.setState({pwInput: event.target.value})
+  }
+
+  handleNewPW = (event) => {
+    this.setState({pw: event.target.value})
+  }
+
+  handleNewName = (event) => {
     this.setState({name: event.target.value})
   }
 
-  askUsername = () => {
+  signUp = (event) => {
+    event.preventDefault();
+    let body = JSON.stringify({name: this.state.name, pw: this.state.pw})
+    let cb = (resB) => {
+      let parsed = JSON.parse(resB)
+      if (parsed === 'Please sign up before continuing') this.setState({missingSignUp: true})
+      else if (parsed === 'account already created') this.setState({accountExists: true})
+      else this.setState({loggedIn: true, sessionID: parsed})
+      }
+    fetch('/signup', {
+      method: 'POST',
+      body: body
+    }).then(res=> res.text())
+      .then(cb)
+  }
+
+  askLogin = () => {
     return (
       <div>
-        <form onSubmit={this.setName}>
-        <input type="text" value={this.state.name} onChange={this.handleName} name="username" placeholder="enter your username"/>
-        <input type="text" onChange={this.handlePW} password="password" placeholder="password"/>
-        <input type="submit"/>
+        Sign Up: <form onSubmit={this.signUp}>
+        <input type="text" value={this.state.name} onChange={this.handleNewName} placeholder="set username"/>
+        <input type="password" value={this.state.pw} onChange={this.handleNewPW} placeholder="set password"/>
+        <input type="submit"/> 
+        {this.state.accountExists? " Account already exists": null}
+        {this.state.missingSignUp? " Please sign up...": null}
+        </form> 
+        Log In: <form onSubmit={this.handleLogin}>
+        <input type="text" value={this.state.nameInput} onChange={this.handleName} placeholder="enter your username"/>
+        <input type="password" value={this.state.pwInput} onChange={this.handlePW} placeholder="enter your password"/>
+        <input type="submit"/> 
+        {this.state.passwordWrong? " Wrong password - try again": null}
+        {this.state.badSignIn? " Please enter credentials.": null}
         </form> 
       </div>
     )
@@ -61,10 +110,12 @@ class App extends Component {
   
   handleSubmit = (event) => {
     event.preventDefault();
-    let body = JSON.stringify({name: this.state.name, input: this.state.input})
+    let body = JSON.stringify({sessionID: this.state.sessionID, input: this.state.input})
     let cb = (respB) => {
+      console.log(respB)
       let parsedB = JSON.parse(respB)
-      this.setState({msgs: parsedB, input: ''})
+      if (typeof(parsedB) === 'string') console.log(parsedB)
+      else this.setState({msgs: parsedB, input: ''})
     }
     fetch('/updateMsgs', {
       method: 'POST',
@@ -74,13 +125,12 @@ class App extends Component {
   }
 
   render() {
-    if (!this.state.nameExists) { 
-      return this.askUsername();
-    } else return (
+    if (!this.state.loggedIn) return this.askLogin();
+    else return (
       <div className="App">
       <div className="msgs">
       <ul style={{listStyleType: 'none'}}>
-        {this.state.msgs.map((item) => <li>{this.state.name}: {item}</li>)}
+        {this.state.msgs.map((item) => <li>{item.username}: {item.content}</li>)}
       </ul>
       </div>
         <div className="chat">
