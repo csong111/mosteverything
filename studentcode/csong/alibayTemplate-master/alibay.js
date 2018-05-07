@@ -17,8 +17,9 @@ let itemsSold = {
 let listings = {
     itemID : {
         userID: 222,
-        price: 4.99,
-        description: "blue sweater"
+        price: 40.99,
+        description: "blue sweater from the 1980s",
+        itemName: "vintage 80s sweater"
     }
 } // map that keeps track of all the items being sold on the marketplace
 
@@ -97,16 +98,16 @@ This function is incomplete. You need to complete it.
       [blurb] A blurb describing the item
     returns: The ID of the new listing
 */
-function createListing(sellerID, price, blurb) {
+function createListing(sellerID, price, blurb, image) {
     
 }
 
 /* 
-getItemDescription returns the description of a listing
+getItemDetails returns the description of a listing
     parameter: [listingID] The ID of the listing
-    returns: An object containing the price and blurb properties.
+    returns: An object containing the price, blurb and image properties.
 */
-function getItemDescription(listingID) {
+function getItemDetails(listingID) {
     
 }
 
@@ -152,7 +153,7 @@ Once an item is sold, it will not be returned by searchForListings
     returns: an array of listing IDs
 */
 function searchForListings(searchTerm) {
-    
+    //if the searchTerm is in the itemTitle or itemBlurb, 
 }
 
 module.exports = {
@@ -163,11 +164,11 @@ module.exports = {
     putItemsSold,
     getItemsSold,
     initializeSeller,
-    allItemsBought,
+    //allItemsBought,
     createListing,
-    getItemDescription,
+    getItemDetails,
     buy,
-    allItemsSold,
+    //allItemsSold,
     allListings,
     searchforListings
     // Add all the other functions that need to be exported
