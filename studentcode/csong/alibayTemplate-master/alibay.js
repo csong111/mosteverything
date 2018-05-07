@@ -41,16 +41,41 @@ function getItemsBought(userID) {
     return ret;
 }
 
-
 /*
-initializeUserIfNeeded adds the UID to our database unless it's already there
+initializeBuyer adds the UID to our database unless it's already there
 parameter: [uid] the UID of the user.
 returns: undefined
 */
-function initializeUserIfNeeded(uid) {
+function initializeBuyer(uid) {
     var items = getItemsBought[uid];
     if(items == null) {
         putItemsBought(uid, []);
+    }
+}
+
+/*repeat above process for itemsSold map */
+
+function putItemsSold(userID, value) {
+    itemsSold[userID] = value;
+}
+
+function getItemSold(userID) {
+    var ret = itemsSold[userID];
+    if(ret == undefined) {
+        return null;
+    }
+    return ret;
+}
+
+/*
+initializeSeller adds the UID to our database unless it's already there
+parameter: [uid] the UID of the user.
+returns: undefined
+*/
+function initializeSeller(uid) {
+    var items = getItemsSold[uid];
+    if(items == null) {
+        putItemsSold(uid, []);
     }
 }
 
@@ -132,12 +157,18 @@ function searchForListings(searchTerm) {
 
 module.exports = {
     genUID, // This is just a shorthand. It's the same as genUID: genUID. 
-    initializeUserIfNeeded,
     putItemsBought,
     getItemsBought,
+    initializeBuyer,
+    putItemsSold,
+    getItemsSold,
+    initializeSeller,
+    allItemsBought,
     createListing,
     getItemDescription,
     buy,
-    allItemsSold
+    allItemsSold,
+    allListings,
+    searchforListings
     // Add all the other functions that need to be exported
 }
